@@ -23,10 +23,9 @@
           </view>			
         
 		<view class="detailfooter">
-		<text class="a">暂不支持支付</text>
+		<text class="a">线下支付</text>
 			<button catchtap="addcart" class='button' style="background-color:#ff0000">立即购买</button> 
 	   </view>
-
             
 </view>
 
