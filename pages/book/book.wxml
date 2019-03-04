@@ -1,0 +1,11 @@
+<!--pages/book/book.wxml-->
+<view class="tea">
+<view class="book" wx:for="{{tea}}" wx:key="{{item.id}}" >
+<view class="wrap">
+<text class="t">{{item.attributes.title}}</text>
+</view>
+<view class="img">
+<block wx:for="{{item.attributes.url}}" wx:key="{{index}}"><image  src="{{item}}"  mode="widthFix" ></image></block>
+</view>
+</view>
+</view>

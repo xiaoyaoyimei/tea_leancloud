@@ -1,0 +1,43 @@
+/**app.wxss**/
+.container {
+  font-size: 0.8rem;
+   height: 100%;
+  box-sizing: border-box;
+  background: #f0f4f3;
+} 
+.flex-wrp {
+display:flex;
+}
+/* 地址相关 */
+.add_item {
+  padding: 10px;
+  margin: 0px 10px 0px 10px;
+  border-bottom: 1px solid silver;
+  border-bottom-color: #efeff4;
+  display: flex;
+  font-size: 14px;
+}
+
+.item_input {
+  width: 100%;
+}
+.add_item text {
+  width:250rpx;
+  font-size: 28rpx;
+  padding-top: 3px;
+}
+
+.add_address .add {
+  width: 90%;
+  height: 44px;
+  background-color: #76d52f;
+  color: white;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 15px;
+  margin-left: 5%;
+  position: fixed;
+  bottom: 15px;
+}

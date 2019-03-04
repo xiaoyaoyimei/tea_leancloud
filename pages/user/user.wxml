@@ -1,0 +1,94 @@
+
+<view class="container more">
+  <!-- 已授权 -->
+
+  <view class="user flex-wrp" >
+
+      <view class="avatar flex-item">
+
+     <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="user-info flex-item">
+    <open-data type="userNickName"></open-data>
+      </view>
+    </view>
+  <view class="myorder">
+    <view class="mt">
+      <text>我的订单</text>
+      <text class="all" catchtap="allorder">查看全部订单></text>
+    </view>
+    <view class="tab_link">
+     <navigator url="../ordertotal/ordertotal?status=01" hover-class="navigator-hover">  
+        <image src="../../image/dfk.png" mode="widthFix"></image>
+        <text>待付款</text>
+      </navigator>
+           <navigator url="../ordertotal/ordertotal?status=02" hover-class="navigator-hover">
+        <image src=" ../../image/dfh.png" mode="widthFix"></image>
+        <text>待发货</text>
+        </navigator>
+      <navigator url="../ordertotal/ordertotal?status=06" hover-class="navigator-hover">
+        <image src="../../image/dsh.png" mode="widthFix"></image>
+        <text>已发货</text>
+       </navigator>
+         <navigator url="../ordertotal/ordertotal?status=07" hover-class="navigator-hover">
+        <image src="../../image/yqs.png" mode="widthFix"></image>
+        <text>已签收</text>
+       </navigator>
+          <navigator url="../ordertotal/ordertotal?status=04" hover-class="navigator-hover">
+        <image src="../../image/yqx.png" mode="widthFix"></image>
+        <text>已取消</text>
+       </navigator>
+           <navigator url="../refundList/refundList" hover-class="navigator-hover">
+        <image src=" ../../image/sh.png" mode="widthFix"></image>
+        <text>售后</text>
+     </navigator>
+    </view>
+  </view>
+
+<view class="my">
+
+
+
+    <navigator url="../addressManager/addressManager" class="my-item flex-wrp">
+      <view class="myitem-icon flex-item">
+        <image src="../../image/u4.png"></image>
+      </view>
+      <view class="myitem-name flex-item">
+        <text>收货地址</text>
+      </view>
+    </navigator>
+
+    <navigator url="../contactUs/contactUs" class="my-item flex-wrp" hover-class="navigator-hover">
+      <view class="myitem-icon flex-item">
+        <image src="../../image/u5.png"></image>
+      </view>
+      <view class="myitem-name flex-item">
+        <text>联系我们</text>
+      </view>
+    </navigator>
+    <navigator url="../aboutUs/aboutUs" class="my-item flex-wrp">
+      <view class="myitem-icon flex-item">
+        <image src="../../image/u6.png"></image>
+      </view>
+      <view class="myitem-name flex-item">
+        <text>关于我们</text>
+      </view>
+    </navigator>
+    <navigator url="../policy/policy" class="my-item flex-wrp" hover-class="navigator-hover">
+      <view class="myitem-icon flex-item">
+        <image src="../../image/u7.png"></image>
+      </view>
+      <view class="myitem-name flex-item">
+        <text>隐私政策</text>
+      </view>
+    </navigator>
+    <navigator url="../advice/advice" class="my-item flex-wrp">
+      <view class="myitem-icon flex-item">
+        <image src="../../image/u8.png"></image>
+      </view>
+      <view class="myitem-name flex-item">
+        <text>意见反馈</text>
+      </view>
+    </navigator>
+  </view>
+</view>

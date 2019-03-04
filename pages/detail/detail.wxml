@@ -1,0 +1,32 @@
+<!--pages/detail/detail.wxml-->
+<view>
+<view class="swiper">
+					<swiper  indicator-dots='true' style='height:640rpx;' >
+                <swiper-item class="img-wrap" > 
+                  <image src="{{content.url.url}}" mode="widthFix"/>
+                </swiper-item>
+					</swiper>
+</view>
+          <view class="sp">
+          <view class="price">￥{{content.price}}.00</view>
+          <view class="name">{{content.name}}</view>
+          <view class="title">{{content.title}}</view>
+          <view class="number">
+              		<text type="ios-remove" class="ios-remove" catchtap="jian">-</text>
+							<input type="text" value="{{quantity}}" bindinput="searchInput"></input>
+					<text type="ios-add" class="ios-add" catchtap="jia">+</text>
+						</view>
+            <view>{{address.name}}{{address.phone}}</view>
+            <view>{{address.ssq}}{{address.detailAddress}}</view>
+                <view bindtap="chooseAddr" class="choose">选择地址</view>
+
+          </view>			
+        
+		<view class="detailfooter">
+		<text class="a">暂不支持支付</text>
+			<button catchtap="addcart" class='button' style="background-color:#ff0000">立即购买</button> 
+	   </view>
+
+            
+</view>
+

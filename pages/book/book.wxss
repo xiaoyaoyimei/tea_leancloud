@@ -1,0 +1,40 @@
+/* pages/book/book.wxss */
+.tea{
+  position: relative;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+    word-wrap: break-word;
+    background: #f7f7f7;
+}
+.wrap{
+  margin-bottom: 15rpx;
+}
+.t{
+  font-size: 0.8rem;
+line-height: 1.5;
+color: #2f2f2f;
+}
+.d{
+  margin: 0 0 8px;
+
+font-size: 13px;
+
+line-height: 24px;
+
+color: #999;
+}
+.img{
+  display: flex;
+  justify-content: center;
+}
+.book{
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+}
+.img {
+  margin-left: -10rpx
+}
+.img image{
+  margin-left: 10rpx
+}

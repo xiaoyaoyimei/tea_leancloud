@@ -1,0 +1,87 @@
+/* pages/detail/detail.wxss */
+.swiper{
+  
+}
+.img-wrap{
+display: flex;
+  justify-content: center
+}
+.img-wrap image{
+  width: 100%;
+}
+.sp{
+  padding:20rpx;
+  border-top: 1px solid #ddd;
+}
+.price{
+  color: #f00;
+}
+.number{
+  overflow: hidden;
+}
+.name{
+  color: #333;
+    font-size: 32rpx;
+}
+.title{
+  color: #787878;
+  font-size: 28rpx;
+  margin-bottom:20rpx;
+}
+	.number input {
+		float: left;
+		line-height: 1.8rem;
+		height: 1.7rem;
+		width: 2.5rem;
+		border: 1px solid #eee;
+		text-align: center;
+	}
+	
+	.number .ios-add {
+		float: left;
+		line-height: 1.8rem;
+		height: 1.8rem;
+		width: 1.8rem;
+		background-color: #ccc;
+		text-align: center;
+	}
+	
+	.number .ios-remove {
+		float: left;
+		line-height: 1.8rem;
+		height: 1.8rem;
+		width: 1.8rem;
+		background-color: #ccc;
+		text-align: center;
+	}
+.choose{
+  margin-top:10px;
+  text-decoration: underline
+}
+.detailfooter {
+		width: 100%;
+		height: 2.5rem;
+		position: fixed;
+		left: 0rem;
+		bottom: 0rem;
+		z-index: 100;
+		border-top: 1px solid #eee;
+		box-shadow: -0.1rem 0px 0px 0px #1b1b1b;
+		background-color: #fff;
+		text-align: center;
+		display: flex;
+		align-items: center;
+  }
+	.detailfooter	.a {
+			width: 50%;
+	}
+
+	.detailfooter	.button {
+			width: 50%;
+			border: none;
+			font-weight: 400;
+			font-size: 0.9rem;
+			color: #FFFFFF;
+			height: 100%;
+      border-radius: 0;
+	}

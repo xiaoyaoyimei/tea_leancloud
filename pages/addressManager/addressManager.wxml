@@ -1,0 +1,36 @@
+
+  <view class="main_view">
+    <scroll-view>
+      <block wx:for-items="{{addressData}}" wx:key="{{index}}">
+        <view data-item="{{item}}" catchtap="addressClick" class="top_background">
+          <view class="top_view">
+            <text>{{item.name}}　{{item.phone}}</text>
+          </view>
+          <view class="address_view">
+            <text>{{item.ssq}}{{item.detailAddress}}</text>
+          </view>
+        </view>
+        <view class="bottom_view">
+          <view data-item-objectid="{{item.objectId}}" bindtap="addrDelete">
+            <image class="address_image" src="../../image/addr_delete.png" mode="aspectFit"></image>
+            <text> 删除　</text>
+          </view>
+          <!-- <view data-item="{{item}}" bindtap="addrEdit">
+            <image class="address_image" src="../../image/addr_edit.png" mode="aspectFit"></image>
+            <text> 编辑　　</text>
+          </view>
+          <view>
+            <switch color="#0099ff" bindtap="switch1Change" data-item-objectid="{{item.objectId}}"
+             data-isDefault="{{item.isDefault}}" checked="{{item.isDefault=='Y'?true:false}}" />
+            <text wx:if="{{item.isDefault=='Y'}}" class="color-dx">默认地址</text>
+            <text wx:else>设为默认</text>
+          </view> -->
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="add_address" bindtap="addressAdd">
+    <view class="add">
+      <text>新建地址</text>
+    </view>
+  </view>

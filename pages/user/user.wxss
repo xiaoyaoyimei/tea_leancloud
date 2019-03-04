@@ -1,0 +1,129 @@
+.user {
+  width: 100%;
+  background: #ffffff;
+  padding: 15rpx 25rpx 15rpx 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #dcdcdc;
+  box-shadow: 0 2px 5px #eeeeee;
+}
+.user .userinfo-avatar{
+  flex: 1;
+  display: inline-block;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 80rpx;
+}
+
+.wximg{
+  width: 120rpx;
+  height: 120rpx;
+}
+.user .user-info{
+  flex: 5;
+  text-align: left;
+}
+.user .user-info text{
+  display: block;
+}
+.user .user-info .userinfo-nickname{
+  padding: 8rpx 0 10rpx 0;
+  font-size: 30rpx;
+  color: #818A8F;
+}
+.user .user-info .edit{
+  font-size: 30rpx;
+  color: #bababa;
+  line-height: 34rpx;
+}
+
+.my{
+  margin: 15rpx 0 0 0;
+  border-top: solid 1px #ebebeb;
+  border-bottom: solid 2px #ebebeb;
+}
+.my .my-item{
+  width: 750rpx;
+  background: #ffffff;
+  padding: 0
+}
+.my .my-item .myitem-icon{
+  flex: 1;
+  text-align: center
+}
+.my .my-item .myitem-icon image{
+  width: 60rpx;
+  height: 60rpx;
+  padding: 15rpx 0;
+}
+.my .my-item .myitem-name{
+  flex: 5;
+  text-align: left;
+  font-size: 34rpx;
+  color: #6d6d6d;
+  line-height: 60rpx;
+  padding: 10rpx 0;
+  border-bottom: solid 1px #ebebeb;
+}
+.my .my-item:last-child .myitem-name{
+  border-bottom: none;
+}
+.logout{
+ height:80rpx;
+display:block;
+line-height:80rpx;
+background:#fff;
+width:100%;
+text-align:center;
+margin-top:40rpx;
+margin-bottom:20rpx;
+color:red;
+}
+.user  navigator{
+  display: inline-block;
+}
+.nologin{
+  justify-content: center;
+  color: #f00;
+  text-align: center
+}
+.myorder{
+  background: #fff;
+  width: 100%;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  color: #787878;
+  padding-bottom:30rpx
+}
+.mt{
+   padding-top:20rpx;
+   padding-bottom: 10rpx;
+   border-bottom: solid 1px #ebebeb;
+  padding-left:10px;
+  padding-right: 10px;
+
+}
+.all{
+  float: right
+}
+
+.tab_link {
+  display: flex
+}
+
+.tab_link navigator{
+ margin-top:30rpx;
+ width:100px;
+ display: flex;
+ flex-direction: column;
+ align-items: center
+
+}
+.tab_link  image{
+  width:40px;
+  height: 40px
+}
+.avatar{
+  width:65px;
+  height: 65px;
+  margin:0 20px;
+}

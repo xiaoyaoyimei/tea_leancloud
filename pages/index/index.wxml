@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="home">
+<view wx:for="{{tea}}" wx:key="{{item.id}}" class="item"  >
+
+<view bindtap='godetail'  data-item="{{item}}" >
+<image src="{{item.url.url}}" mode="widthFix"></image>
+<view class="t">{{item.name}}</view>
+<view class="c">{{item.title}}</view>
+<view class="p">￥{{item.price}}.00</view>
+</view>
+</view>
+</view>

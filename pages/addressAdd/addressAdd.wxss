@@ -1,0 +1,21 @@
+
+.item_input_1{
+    padding-left: 15px;
+    width: 70%;
+}
+.item_picker{
+    width: 100%;
+}
+.item_picker1{
+    width: 85%;
+}
+.picker{
+    padding-top: 1px;
+    padding-left: 61px;
+    color: lightskyblue;
+}
+.picker_1{
+    padding-top: 1px;
+    padding-left: 39px;
+    color: lightskyblue;
+}
