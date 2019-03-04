@@ -9,7 +9,8 @@
     "pages/addressManager/addressManager",
     "pages/addressEdit/addressEdit",
     "pages/addressAdd/addressAdd",
-    "pages/advice/advice"
+    "pages/advice/advice",
+    "pages/ordertotal/ordertotal"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -1,6 +1,6 @@
 // pages/detail/detail.js
 const AV = require('../../utils/av-live-query-weapp-min');
-var order = AV.Object.extend('order');
+var Order = AV.Object.extend('order');
 Page({
 
   /**
@@ -9,14 +9,16 @@ Page({
   data: {
     content:{},
     quantity:1,
-    address:{}
+    address:{
+      objectId:''
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+
     var content = JSON.parse(options.dForm);
     console.log(content)
     this.setData({
@@ -67,7 +69,8 @@ Page({
     }
   },
   addcart:function(){
-    if (this.data.address == {}) {
+    
+    if (this.data.address.objectId =='') {
       wx.showToast({
         title: '请选择地址',
         icon: 'none',
@@ -75,8 +78,23 @@ Page({
       })
       return
     }
+    else{
+      var neworder = new Order();
+      // 设置名称
 
-   
+      neworder.set('addressId', this.data.address.objectId);
+      neworder.set('teaId', this.data.content.objectId);
+      neworder.set('orderStatus', '01');
+      // 设置优先级
+      neworder.save().then(function (data) {
+        wx.navigateTo({
+          url: "../ordertotal/ordertotal?status=00"
+        })
+      }, function (error) {
+        console.error(error);
+      });
+    }
+  
 
   },
   /**

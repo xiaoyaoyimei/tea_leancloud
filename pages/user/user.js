@@ -20,9 +20,13 @@ Page({
       url: '../manager/manager'
     })
   },
+  allorder: function () {
+    //全部订单
+    wx.navigateTo({
+      url: "../ordertotal/ordertotal?status=00"
+    })
+  },
   onShow: function () {
-  
-
   },
 
 })
