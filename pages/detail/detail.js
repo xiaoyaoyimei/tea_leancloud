@@ -90,7 +90,6 @@ Page({
       // 设置优先级
       neworder.save().then(function (res) {
         var orderres=res;
-        console.log(res);
         //存order_address
         var neworderaddress=new AV.Object('order_address');
         neworderaddress.set('name',_this.data.address.name);
@@ -107,15 +106,14 @@ Page({
           neworderitem.set('url', _this.data.content.url.url);
               neworderitem.set('orderObjectId', orderres.id);
               neworderitem.save().then(function (itemres) {
-                console.log('item')
-                console.log(itemres)
+           wx.navigateTo({
+          url: "../ordertotal/ordertotal?status=00"
+        })
               });
         });
         //存order_item
    
-        // wx.navigateTo({
-        //   url: "../ordertotal/ordertotal?status=00"
-        // })
+       
       }, function (error) {
         console.error(error);
       });

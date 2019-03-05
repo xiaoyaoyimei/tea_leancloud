@@ -92,12 +92,22 @@ Page({
     this.getData();
   },
    getData: function () {
-  
+    //  var query = new AV.Query('City');
+    //  query.equalTo('name', '广州');
+    //  query.include(['dependent']);
+    //  query.find().then(function (result) {
+    //    if (result.length > 0) {
+    //      var GuangZhou = result[0];
+    //      var province = GuangZhou.get('dependent');
+    //    }
+    //  });
      var _this = this;
-     var query = new AV.Query(Order);
-     query.descending('createdAt');
-     query.equalTo('userAuth', wx.getStorageSync('username'));
-     query.find().then(function (res) {
+     var orderItem = new AV.Query('order_item');
+     orderItem.equalTo('orderObjectId',);
+     var order = new AV.Query(Order);
+     order.descending('createdAt');
+     order.equalTo('userAuth', wx.getStorageSync('username'));
+     order.find().then(function (res) {
        //通过查找出来的teaId搜出商品
        
        _this.setData({
