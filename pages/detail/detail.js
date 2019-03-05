@@ -10,7 +10,11 @@ Page({
     content:{},
     quantity:1,
     address:{
-      objectId:''
+      objectId:'',
+      name:'',
+      phone:'',
+      ssq:'',
+      detailAddress:''
     }
   },
 
@@ -18,7 +22,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     var content = JSON.parse(options.dForm);
     console.log(content)
     this.setData({
@@ -69,7 +72,7 @@ Page({
     }
   },
   addcart:function(){
-    
+    var _this=this;
     if (this.data.address.objectId =='') {
       wx.showToast({
         title: '请选择地址',
@@ -82,14 +85,37 @@ Page({
       var neworder = new Order();
       // 设置名称
 
-      neworder.set('addressId', this.data.address.objectId);
-      neworder.set('teaId', this.data.content.objectId);
+      neworder.set('userAuth',wx.getStorageSync('username'));
       neworder.set('orderStatus', '01');
       // 设置优先级
-      neworder.save().then(function (data) {
-        wx.navigateTo({
-          url: "../ordertotal/ordertotal?status=00"
-        })
+      neworder.save().then(function (res) {
+        var orderres=res;
+        console.log(res);
+        //存order_address
+        var neworderaddress=new AV.Object('order_address');
+        neworderaddress.set('name',_this.data.address.name);
+        neworderaddress.set('phone', _this.data.address.phone);
+        neworderaddress.set('ssq', _this.data.address.ssq);
+        neworderaddress.set('detailAddress', _this.data.address.detailAddress);
+        neworderaddress.set('orderObjectId', orderres.id);
+        neworderaddress.save().then(function (res) {
+            var neworderitem = new AV.Object('order_item');
+              neworderitem.set('name', _this.data.content.name);
+          neworderitem.set('title', _this.data.content.title);
+          neworderitem.set('itemObjectId', _this.data.content.objectId);
+          neworderitem.set('price', _this.data.content.price);
+          neworderitem.set('url', _this.data.content.url.url);
+              neworderitem.set('orderObjectId', orderres.id);
+              neworderitem.save().then(function (itemres) {
+                console.log('item')
+                console.log(itemres)
+              });
+        });
+        //存order_item
+   
+        // wx.navigateTo({
+        //   url: "../ordertotal/ordertotal?status=00"
+        // })
       }, function (error) {
         console.error(error);
       });

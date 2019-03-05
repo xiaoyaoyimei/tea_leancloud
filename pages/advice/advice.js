@@ -1,7 +1,9 @@
 // pages/advice/advice.js
-import { $init, $digest } from '../../utils/util.js'
+const AV = require('../../utils/av-live-query-weapp-min');
+var Advise = AV.Object.extend('advise');
+var util = require('../../utils/util.js')
 import { promisify } from '../../utils/promise.util'
-// var request = require('../../utils/https.js')
+
 var baseorgin = getApp().globalData.baseorgin;
 //上传图片
 const wxUploadFile = promisify(wx.uploadFile)
@@ -90,53 +92,84 @@ Page({
 
   },
   add() {
-
-    const content = this.data.content;
-    var that = this;
-    that.setData({
-      disabled: true,
-    })
-    if (content) {
-      const arr = [] //将选择的图片组成一个Promise数组，准备进行并行上传
-      for (let path of this.data.images) {
-        arr.push(wxUploadFile({
-          url: `${baseorgin}/upload/upload?path=account`,
-          filePath: path,
-          name: 'file',
-        }))
-      }
-      wx.showLoading({
-        title: '正在创建...',
-        mask: true
-      }) // 开始并行上传图片 
-      Promise.all(arr).then(res => {
-
-        return res.map(item => JSON.parse(item.data).msg)
-      }).catch(err => {
-        console.log(">>>> upload images error:", err)
-      }).then(urls => { // 调用保存问题的后端接口 
-        let img = urls[0];
-        request.req2('/complaint/add', 'POST', {
-                userId: that.data.userId,
-          mobile: that.data.mobile,
-                content: that.data.content,
-          imageUrl: img
-        }, (err, res) => {
-          if (res.code == '200') {
-            const pages = getCurrentPages();
-            const currPage = pages[pages.length - 1];
-            const prevPage = pages[pages.length - 2];
-            wx.navigateBack()
-          }
-          that.setData({
-            disabled: false,
+    var newadvise = new Advise();
+    // 设置名称
+    newadvise.set('name', this.data.userId);
+    newadvise.set('phone', this.data.mobile);
+    newadvise.set('content', this.data.content);
+    // 设置优先级
+    newadvise.save().then(function (data) {
+      wx.navigateBack({
+        delta: 1, // 回退前 delta(默认为1) 页面
+        success: function (res) {
+          // success
+          wx.showToast({
+            title: '新增成功',
+            icon: 'none',
+            duration: 1500
           })
-        })
-      }).catch(err => {
-        console.log(">>>> create question error:", err)
-      }).then(() => {
-        wx.hideLoading()
+        },
+        fail: function () {
+          // fail
+        },
+        complete: function () {
+          // complete
+        }
       })
-    }
+    }, function (error) {
+      console.error(error);
+      wx.showToast({
+        title: '新增失败',
+        icon: 'loading',
+        duration: 1500
+      })
+    });
+    // const content = this.data.content;
+    // var that = this;
+    // that.setData({
+    //   disabled: true,
+    // })
+    // if (content) {
+    //   const arr = [] //将选择的图片组成一个Promise数组，准备进行并行上传
+    //   for (let path of this.data.images) {
+    //     arr.push(wxUploadFile({
+    //       url: `${baseorgin}/upload/upload?path=account`,
+    //       filePath: path,
+    //       name: 'file',
+    //     }))
+    //   }
+    //   wx.showLoading({
+    //     title: '正在创建...',
+    //     mask: true
+    //   }) // 开始并行上传图片 
+    //   Promise.all(arr).then(res => {
+
+    //     return res.map(item => JSON.parse(item.data).msg)
+    //   }).catch(err => {
+    //     console.log(">>>> upload images error:", err)
+    //   }).then(urls => { // 调用保存问题的后端接口 
+    //     let img = urls[0];
+    //     request.req2('/complaint/add', 'POST', {
+    //             userId: that.data.userId,
+    //       mobile: that.data.mobile,
+    //             content: that.data.content,
+    //       imageUrl: img
+    //     }, (err, res) => {
+    //       if (res.code == '200') {
+    //         const pages = getCurrentPages();
+    //         const currPage = pages[pages.length - 1];
+    //         const prevPage = pages[pages.length - 2];
+    //         wx.navigateBack()
+    //       }
+    //       that.setData({
+    //         disabled: false,
+    //       })
+    //     })
+    //   }).catch(err => {
+    //     console.log(">>>> create question error:", err)
+    //   }).then(() => {
+    //     wx.hideLoading()
+    //   })
+    // }
   }
 })

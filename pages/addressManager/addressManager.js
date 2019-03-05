@@ -4,16 +4,17 @@ var mime=0;
 Page({
   data:{
     addressData:[],
+    userName:''
   },
-  //update 表名  set Description = replace(Description, '景点' , '景区')
+
   // switch1Change: function (e) {
   //   var that = this;
   //   var objectId = e.currentTarget.dataset.itemObjectid;
-  //   console.log(isDefault)
+  //   var username=this.data.userName;
   //   // 第一个参数是 className，第二个参数是 objectId
-  //   AV.Query.doCloudQuery('update address set isDefault = replace(Description,'')').then(function (data) {
+  //   AV.Query.doCloudQuery('update address set isDefault="N" where isDefault="Y" and userAuth="'+username+'"').then(function (data) {
   //     // data 中的 results 是本次查询返回的结果，AV.Object 实例列表
-  //     AV.Query.doCloudQuery(`update address set isDefault="Y" where objectId=${objectId}`)
+  //    // AV.Query.doCloudQuery(`update address set isDefault="Y" where objectId=${objectId}`)
   //   }, function (error) {
   //     // 异常处理
   //     console.error(error);
@@ -89,16 +90,16 @@ Page({
   },
   onLoad:function(options){
       mime = options.mime
-
+   
   },
 
   onReady: function() {
-
   },
   getAddressList(){
     var _this = this;
     var query = new AV.Query(Address);
     query.descending('createdAt');
+    query.equalTo('userAuth', this.data.userName)
     query.find().then(function (res) {
       _this.setData({
         addressData: res,
@@ -116,6 +117,9 @@ Page({
   },
   onShow: function() {
     // 生命周期函数--监听页面加载
+    this.setData({
+      userName: wx.getStorageSync('username')
+    })
     this.getAddressList();
   },
 })

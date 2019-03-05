@@ -96,8 +96,10 @@ Page({
      var _this = this;
      var query = new AV.Query(Order);
      query.descending('createdAt');
+     query.equalTo('userAuth', wx.getStorageSync('username'));
      query.find().then(function (res) {
-
+       //通过查找出来的teaId搜出商品
+       
        _this.setData({
          list: res,
          loadingHidden:true
