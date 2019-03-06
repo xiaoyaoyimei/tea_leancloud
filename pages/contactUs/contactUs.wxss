@@ -1,0 +1,6 @@
+/* pages/contactUs/contactUs.wxss */
+.p{
+  font-size: 28rpx;
+  color: #787878;
+  padding: 20rpx 30rpx;
+}

@@ -10,20 +10,24 @@ display: flex;
   width: 100%;
 }
 .sp{
-  padding:20rpx;
+ 
   border-top: 1px solid #ddd;
 }
 .price{
+   padding-left:20rpx;
   color: #f00;
 }
 .number{
+   padding-left:20rpx;
   overflow: hidden;
 }
 .name{
+   padding-left:20rpx;
   color: #333;
     font-size: 32rpx;
 }
 .title{
+   padding-left:20rpx;
   color: #787878;
   font-size: 28rpx;
   margin-bottom:20rpx;
@@ -55,8 +59,11 @@ display: flex;
 		text-align: center;
 	}
 .choose{
+  margin-left:20rpx;
   margin-top:10px;
-  text-decoration: underline
+  text-decoration: underline;
+  font-size:14px;
+  color:#76d52f;
 }
 .detailfooter {
 		width: 100%;
@@ -85,3 +92,15 @@ display: flex;
 			height: 100%;
       border-radius: 0;
 	}
+  .addr{
+       margin-left:10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-top:5px solid #ddd;
+  }
+    .addrd{
+      margin-left:10px;
+    font-size: 14px;
+    color:#666;
+    }

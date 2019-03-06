@@ -16,8 +16,8 @@
 							<input type="text" value="{{quantity}}" bindinput="searchInput"></input>
 					<text type="ios-add" class="ios-add" catchtap="jia">+</text>
 						</view>
-            <view>{{address.name}}{{address.phone}}</view>
-            <view>{{address.ssq}}{{address.detailAddress}}</view>
+            <view class="addr">{{address.name}}{{address.phone}}</view>
+            <view class="addrd">{{address.ssq}}{{address.detailAddress}}</view>
                 <view bindtap="chooseAddr" class="choose">选择地址</view>
 
           </view>			

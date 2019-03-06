@@ -1,0 +1,15 @@
+/* pages/aboutUs/aboutUs.wxss */
+.text-center{
+  margin-top: 10px;
+  text-align: center;
+}
+
+.p{
+  text-indent: 10px;
+  font-size:14px;
+  color:#666;
+  margin-bottom:10px;
+}
+.wrap{
+  padding: 10px;
+}

@@ -82,44 +82,27 @@ Page({
       return
     }
     else{
-      var neworder = new Order();
-      // 设置名称
 
-      neworder.set('userAuth',wx.getStorageSync('username'));
+      // 新建一个 AV.Object
+      var neworderitem = new AV.Object('order_item');// 广州
+      neworderitem.set('name', _this.data.content.name);
+      neworderitem.set('title', _this.data.content.title);
+      neworderitem.set('price', _this.data.content.price);
+      neworderitem.set('url', _this.data.content.url.url);
+      var neworder = new AV.Object('order');// 广东
+      neworder.set('userAuth', wx.getStorageSync('username'));
       neworder.set('orderStatus', '01');
-      // 设置优先级
-      neworder.save().then(function (res) {
-        var orderres=res;
-        //存order_address
-        var neworderaddress=new AV.Object('order_address');
-        neworderaddress.set('name',_this.data.address.name);
-        neworderaddress.set('phone', _this.data.address.phone);
-        neworderaddress.set('ssq', _this.data.address.ssq);
-        neworderaddress.set('detailAddress', _this.data.address.detailAddress);
-        neworderaddress.set('orderObjectId', orderres.id);
-        neworderaddress.save().then(function (res) {
-            var neworderitem = new AV.Object('order_item');
-              neworderitem.set('name', _this.data.content.name);
-          neworderitem.set('title', _this.data.content.title);
-          neworderitem.set('itemObjectId', _this.data.content.objectId);
-          neworderitem.set('price', _this.data.content.price);
-          neworderitem.set('url', _this.data.content.url.url);
-              neworderitem.set('orderObjectId', orderres.id);
-              neworderitem.save().then(function (itemres) {
-           wx.navigateTo({
+      neworder.set('name', _this.data.address.name);
+      neworder.set('phone', _this.data.address.phone);
+      neworder.set('ssq', _this.data.address.ssq);
+      neworder.set('detailAddress', _this.data.address.detailAddress);
+      neworderitem.set('dependent', neworder);// 为广州设置 dependent 属性为广东
+      neworderitem.save().then(function (item) {
+        wx.navigateTo({
           url: "../ordertotal/ordertotal?status=00"
         })
-              });
-        });
-        //存order_item
-   
-       
-      }, function (error) {
-        console.error(error);
       });
     }
-  
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

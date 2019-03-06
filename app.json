@@ -10,7 +10,11 @@
     "pages/addressEdit/addressEdit",
     "pages/addressAdd/addressAdd",
     "pages/advice/advice",
-    "pages/ordertotal/ordertotal"
+    "pages/ordertotal/ordertotal",
+    "pages/orderDetail/orderDetail",
+    "pages/aboutUs/aboutUs",
+   "pages/policy/policy",
+   "pages/contactUs/contactUs"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -86,6 +86,7 @@ Page({
       newaddress.set('name', this.data.name);
       newaddress.set('phone', this.data.phoneNum);
       newaddress.set('ssq', this.data.ssq);
+      newaddress.set('userAuth',wx.getStorageSync('username'));
       newaddress.set('detailAddress', this.data.detailAddress);
       // 设置优先级
       newaddress.save().then(function (data) {

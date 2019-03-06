@@ -5,13 +5,29 @@ var Order = AV.Object.extend('order');
 Page({
   data: {
     pageNo: 1,
-    list: [],
-    newlist: [],
+    orderList: [],
     statusenums:[],
     loadingHidden: false,
     status:'00',
     hasShow:true,
-    loginhidden:false
+    loginhidden:false,
+  },
+  getData: function () {
+    var _this=this;
+    var query = new AV.Query('order_item');
+    query.include(['dependent']);
+    query.find().then(function (result) {
+     console.log(result)
+      if (result.length > 0) {
+        _this.setData({
+          orderList: result
+        })
+      }else{
+        _this.setData({
+          hasShow: false
+        })
+      }
+    });
   },
   goindex:function(){
     wx.switchTab({
@@ -40,12 +56,11 @@ Page({
       }
     })
   },
-  seedetail(e){
-    var orderNo = e.currentTarget.dataset.orderno;
-    var orderstatus = e.currentTarget.dataset.orderstatus;
-    wx.redirectTo({
-      url: `../orderDetail/orderDetail?orderNo=${orderNo}&orderStatus=${orderstatus}`,
-    })
+  showDetail(e) {
+      let dForm = JSON.stringify(e.currentTarget.dataset.item);
+      wx.navigateTo({
+        url: `../orderDetail/orderDetail?dForm=${dForm}`,
+      })
   },
   quzhifu(e){
     var that=this;
@@ -91,40 +106,7 @@ Page({
     });
     this.getData();
   },
-   getData: function () {
-    //  var query = new AV.Query('City');
-    //  query.equalTo('name', '广州');
-    //  query.include(['dependent']);
-    //  query.find().then(function (result) {
-    //    if (result.length > 0) {
-    //      var GuangZhou = result[0];
-    //      var province = GuangZhou.get('dependent');
-    //    }
-    //  });
-     var _this = this;
-     var orderItem = new AV.Query('order_item');
-     orderItem.equalTo('orderObjectId',);
-     var order = new AV.Query(Order);
-     order.descending('createdAt');
-     order.equalTo('userAuth', wx.getStorageSync('username'));
-     order.find().then(function (res) {
-       //通过查找出来的teaId搜出商品
-       
-       _this.setData({
-         list: res,
-         loadingHidden:true
-       })
-       // 查询到商品后，在前端展示到相应的位置中。
-
-     }).catch(function (error) {
-       alert(JSON.stringify(error));
-       wx.showToast({
-         title: '查询失败',
-         icon: 'loading',
-         duration: 1500
-       })
-     });
-  },
+   
   maopao(item) {
     for (let j = 0; j < item.commentList.length; j++) {
       for (let n = 0; n < item.orderItems.length; n++) {
