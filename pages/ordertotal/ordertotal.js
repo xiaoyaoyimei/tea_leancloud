@@ -14,20 +14,31 @@ Page({
   },
   getData: function () {
     var _this=this;
-    var query = new AV.Query('order_item');
-    query.include(['dependent']);
-    query.find().then(function (result) {
-     console.log(result)
+    var status = _this.data.status;
+    var username = wx.getStorageSync('username')
+    var sql = `select include dependent,* from order_item where dependent in (select * from order where userAuth="${username}")`;
+    if (status!= '00') {
+      sql = `select include dependent,* from order_item where dependent in (select * from order where userAuth="${username}" and orderStatus="${status}") `;
+    } 
+  
+    AV.Query.doCloudQuery(sql).then(function (data) {
+      // data 中的 results 是本次查询返回的结果，AV.Object 实例列表
+      var result = data.results;
       if (result.length > 0) {
         _this.setData({
+          hasShow:true,
           orderList: result
         })
-      }else{
+      } else {
         _this.setData({
           hasShow: false
         })
       }
+    }, function (error) {
+      //查询失败，查看 error
+      console.error(error);
     });
+
   },
   goindex:function(){
     wx.switchTab({
@@ -42,8 +53,6 @@ Page({
   },
   onShow: function () {
     //刷新数据
-
-   
   },
   getStatus:function(){
     var that = this;
@@ -62,35 +71,7 @@ Page({
         url: `../orderDetail/orderDetail?dForm=${dForm}`,
       })
   },
-  quzhifu(e){
-    var that=this;
-    var orderNo = e.currentTarget.dataset.orderno;
-    wx.login({
-      success: function (res) {
-        request.req2(`order/weixin/browser/${orderNo}`, 'GET', res.code, (err, res) => {
-          var weval=res.object;
-            wx.requestPayment({
-              timeStamp: weval.timeStamp,
-              nonceStr: weval.nonceStr,
-              package: weval.package,
-              signType: weval.signType,
-              paySign: weval.paySign,
-              success: function (res) { //跳转
-                wx.redirectTo({
-                  url: '../paycomplete/paycomplete',
-                })
-              },
-              fail: function () {
-                util.showError('支付失败')
-              },
-              complete: function () {
-                that.getData();
-              }
-            })
-        }); 
-      } 
-      }) 
-  },
+  
   statusfilter(value) {
     for (var i = 0; i < this.data.statusenums.length; i++) {
       if (this.data.statusenums[i].key == value) {
@@ -107,16 +88,7 @@ Page({
     this.getData();
   },
    
-  maopao(item) {
-    for (let j = 0; j < item.commentList.length; j++) {
-      for (let n = 0; n < item.orderItems.length; n++) {
-        if (item.commentList[j].orderItemsId == item.orderItems[n].orderItemsId) {
-          item.orderItems[n].pinglun = item.commentList[j].canComment;
-          item.orderItems[n].productModelId = item.commentList[j].productModel.id;
-        }
-      }
-    }
-  },
+
   cancel(e) {
     var self=this;
     var orderNo = e.currentTarget.dataset.orderno;
@@ -140,29 +112,7 @@ Page({
       }
     })
   },
-  qianshou(e) {
-    var self = this;
-    var orderNo = e.currentTarget.dataset.orderno;
-    wx.showModal({
-      title: '温馨提示',
-      content: '确定签收该订单?',
-      success: function (res) {
-        if (res.confirm) {
-          request.req2(`order/receive/${orderNo}`, 'POST', null, (err, res) => {
-            if (res.code == 200) {
-              util.showSuccess(res.msg)
-              self.getData();
-            } else {
-              util.showError(res.msg)
-            }
-          });
-        }
-      },
-      fail(e) {
-        callback(e)
-      }
-    })
-  },
+
   showrefund(e){
     var self = this;
     var orderNo = e.currentTarget.dataset.orderno;

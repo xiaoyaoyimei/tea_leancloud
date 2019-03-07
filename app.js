@@ -13,26 +13,7 @@ App({
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
-    AV.User.loginWithWeapp().then(user => {
-  
-        this.globalData.user = user.toJSON();
 
-    }).catch(console.error);
-    // 假设已经通过 AV.User.loginWithWeapp() 登录
-
-    const user = AV.User.current();
-
-    // 调用小程序 API，得到用户信息
-    wx.getUserInfo({
-      success: ({ userInfo }) => {
-                // 更新当前用户的信息
-        user.set(userInfo).save().then(user => {
-          // 成功，此时可在控制台中看到更新后的用户信息
-          this.globalData.user = user.toJSON();
-          wx.setStorageSync('username', this.globalData.user.username)
-        }).catch(console.error);
-      }
-    });
   },
   globalData: {
     userInfo: null,

@@ -82,3 +82,27 @@ display:flex;
   border-radius: 5px;
   margin-right: 10px;
 }
+ .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 400px;
+
+  }
+  .flex-center image{
+    width: 100px;
+    height:100px
+  }
+  .empty  .color-dx  {
+    border: 1px solid #76d52f;
+    text-align: center;
+    width: 100px;
+    height: 32px;
+    color: #76d52f;
+    background: #fff;
+    line-height: 32px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top:25px;
+}

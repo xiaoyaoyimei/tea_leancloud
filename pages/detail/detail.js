@@ -23,7 +23,6 @@ Page({
    */
   onLoad: function (options) {
     var content = JSON.parse(options.dForm);
-    console.log(content)
     this.setData({
       content: content
     })
@@ -89,13 +88,14 @@ Page({
       neworderitem.set('title', _this.data.content.title);
       neworderitem.set('price', _this.data.content.price);
       neworderitem.set('url', _this.data.content.url.url);
+   
       var neworder = new AV.Object('order');// 广东
-      neworder.set('userAuth', wx.getStorageSync('username'));
       neworder.set('orderStatus', '01');
       neworder.set('name', _this.data.address.name);
       neworder.set('phone', _this.data.address.phone);
       neworder.set('ssq', _this.data.address.ssq);
       neworder.set('detailAddress', _this.data.address.detailAddress);
+      neworder.set('userAuth', wx.getStorageSync('username'));
       neworderitem.set('dependent', neworder);// 为广州设置 dependent 属性为广东
       neworderitem.save().then(function (item) {
         wx.navigateTo({

@@ -24,7 +24,7 @@
               </view>
               </view>
   <view class="flex-center empty " wx:else>
-    <image src="../../images/order_empty.png "></image>
+    <image src="../../image/empty-box.png "></image>
     <text>您还没有相关的订单</text>
     <text catchtap="goindex" class="color-dx ">去购物</text>
   </view>

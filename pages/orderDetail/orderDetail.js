@@ -25,48 +25,66 @@ Page({
       t: '',
   },
   onLoad(options) {
-    console.log('onload')
-    var content = JSON.parse(options.dForm);
-
-    this.setData({
-      content: content
-    })
-    this.getStatusEnum();
-      
-  },
-  onReady(){
-    console.log('onReady')
     var _this=this;
-     this.data.content.dependent.znStatus = this.statusfilter(this.data.content.dependent.orderStatus);
-    this.setData({
-      content: _this.data.content
+    var p1 = new Promise(_this.getStatusEnum);
+    p1.then(function(res){
+      var content = JSON.parse(options.dForm);
+      content.dependent.znStatus = _this.statusfilter(content.dependent.orderStatus);
+      _this.setData({
+        content: content
+      })
     })
   },
-  onshow(){
-  },
-  onHide(){
 
-  },
+  getStatusEnum(resolve, reject) {
+      var _this=this;
+       AV.Query.doCloudQuery('select key, value from orderStatus').then(function (data) {
+         _this.setData({
+           statusEnum: data.results
+         })
+         resolve('ok');
+       }, function (error) {
+         //查询失败，查看 error
+         console.error(error);
+         reject();
+       });
+  
 
-    getStatusEnum() {
-      AV.Query.doCloudQuery('select key, value from orderStatus').then(function (data) {
-        this.setData=({
-            statusEnum: data.results
-        })
-      }, function (error) {
-        //查询失败，查看 error
-        console.error(error);
-      });
     },
 
   statusfilter(value) {
     for (var i = 0; i < this.data.statusEnum.length; i++) {
-      if (this.data.statusEnum[i].key == value) {
-        return this.data.statusEnum[i].value;
+      if (this.data.statusEnum[i].attributes.key == value) {
+        return this.data.statusEnum[i].attributes.value;
       }
     }
   }, 
 
-
+  cancel(e) {
+    var self = this;
+    var orderNo = e.currentTarget.dataset.orderobjectid;
+    wx.showModal({
+      title: '温馨提示',
+      content: '确定取消该订单?',
+      success: function (res) {
+        if (res.confirm) {
+          AV.Query.doCloudQuery(`update order set orderStatus="04" where objectId="${orderNo}"`).then(function (data) {
+            var results = data.results;
+            util.showSuccess('取消成功')
+            wx.navigateBack({
+              delta: 2, // 回退前 delta(默认为1) 页面
+            })
+          }, function (error) {
+            //查询失败，查看 error
+            console.error(error);
+            util.showError('操作失败')
+          });
+        }
+      },
+      fail(e) {
+        callback(e)
+      }
+    })
+  },
 
 })

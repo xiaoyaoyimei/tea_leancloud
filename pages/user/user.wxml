@@ -38,10 +38,6 @@
         <image src="../../image/yqx.png" mode="widthFix"></image>
         <text>已取消</text>
        </navigator>
-           <navigator url="../refundList/refundList" hover-class="navigator-hover">
-        <image src=" ../../image/sh.png" mode="widthFix"></image>
-        <text>售后</text>
-     </navigator>
     </view>
   </view>
 
